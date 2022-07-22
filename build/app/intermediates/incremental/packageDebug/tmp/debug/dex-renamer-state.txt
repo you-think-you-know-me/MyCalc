@@ -1,0 +1,4 @@
+#Fri Jul 15 21:41:27 IST 2022
+base.0=C\:\\Users\\SHRUTI\\Desktop\\CSOC\\WEEK1\\MyCalc\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+renamed.0=classes.dex
+path.0=classes.dex
