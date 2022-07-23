@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:first_app/theme/theme_constants.dart';
 import 'package:first_app/theme/theme_manager.dart';
+import 'package:first_app/main.dart';
+import 'package:first_app/graph.dart';
+ import 'dart:math';
 
-
+import ''; 
 
 ThemeManager _themeManager = ThemeManager();
 class Scientific extends StatefulWidget {
@@ -36,13 +39,14 @@ class _ScientificState extends State<Scientific> {
 
   String output = "0";
   String message = " ";
+  int i=0;
 
   Widget buildButton(String buttonText) {
     return new Expanded(
         child: Container(
             child: SizedBox(
                 width: 70,
-                height: 70,
+                height: 55,
                 child: new ElevatedButton(
                   onPressed: () => buttonPressed(buttonText),
                   child: Text(buttonText,
@@ -67,11 +71,18 @@ class _ScientificState extends State<Scientific> {
       num1 = 0;
       num2 = 0;
       operand = "";
-    } else if (buttonText == "+" ||
+    } 
+    else if (buttonText == "+" ||
         buttonText == "-" ||
         buttonText == "x" ||
         buttonText == "/" ||
-        buttonText == "%") {
+        buttonText == "%" ||
+        buttonText == "^"||
+        buttonText=="log" ||
+            buttonText=="ln" ||
+            buttonText=="sin" ||
+            buttonText=="cos" ||
+            buttonText=="tan" ) {
       operand = buttonText;
       num1 = double.parse(output);
       _output = "0";
@@ -104,10 +115,35 @@ class _ScientificState extends State<Scientific> {
           return;
         }
       }
+       if (operand == "^") {
+        double p=1;
+        for(int j=0;j<num2;j++){
+          p*=num1;
+        }
+        _output = (p).toString();
+      }
+      if (operand == "sin") {
+        _output = (sin(num2)).toString();
+      }
+      if (operand == "tan") {
+        _output = (tan(num2)).toString();
+      }
+      if (operand == "cos") {
+        _output = (cos(num2)).toString();
+      }
+      if (operand == "log") {
+        _output = (log(num2)/log(10)).toString();
+      }
+      if (operand == "ln") {
+        _output = (log(num2)).toString();
+      }
       operand = "";
       num1 = 0.0;
       num2 = 0.0;
     } else {
+      if(buttonText=="e"){
+        _output+="2.718281828459045";
+      }
       _output += buttonText;
     }
     setState(() {
@@ -126,7 +162,7 @@ class _ScientificState extends State<Scientific> {
     // than having to individually change instances of widgets.
     return Scaffold(
       backgroundColor: Colors.white,
-      drawer: Drawer(
+       drawer: Drawer(
           child: Center(
         child: new Column(children: [
           new Row(children: [
@@ -164,7 +200,8 @@ class _ScientificState extends State<Scientific> {
                       )
                     ],
                   ),
-                  onTap: (){},
+                  onTap: (){Navigator.push(context,MaterialPageRoute(builder:(context)=> MyHomePage()));},
+                  
                 ),
                 Divider(
                   thickness: 0.2,
@@ -177,7 +214,7 @@ class _ScientificState extends State<Scientific> {
                       style: TextStyle(fontSize: 30, color: Colors.white),
                     )
                   ]),
-                  onTap: (){},
+                  onTap: (){Navigator.push(context,MaterialPageRoute(builder:(context)=>const Scientific()));},
                 ),
                 Divider(
                   thickness: 0.2,
@@ -190,7 +227,7 @@ class _ScientificState extends State<Scientific> {
                       style: TextStyle(fontSize: 30, color: Colors.white),
                     )
                   ]),
-                  onTap: (){},
+                  onTap: (){Navigator.push(context,MaterialPageRoute(builder:(context)=>const Graph()));},
                 ),
               ]))
         ]),
@@ -259,6 +296,21 @@ class _ScientificState extends State<Scientific> {
             SizedBox(
               height: 0.2,
             ),
+             new Row(children: <Widget>[
+              buildButton("Deg"),
+              buildButton("e"),
+              buildButton("log"),
+              buildButton("ln"),
+            ]),
+             SizedBox(
+              height: 0.2,
+            ),
+             new Row(children: <Widget>[
+              buildButton("sin"),
+              buildButton("cos"),
+              buildButton("tan"),
+              buildButton("^"),
+            ]),
             new Row(children: <Widget>[
               buildButton("7"),
               buildButton("8"),

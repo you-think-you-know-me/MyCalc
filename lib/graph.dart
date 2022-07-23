@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:first_app/theme/theme_constants.dart';
 import 'package:first_app/theme/theme_manager.dart';
+import 'package:first_app/main.dart';
+import 'package:first_app/scientific.dart';
 
 
 
@@ -164,7 +166,8 @@ class _GraphState extends State<Graph> {
                       )
                     ],
                   ),
-                  onTap: (){},
+                  onTap: (){Navigator.push(context,MaterialPageRoute(builder:(context)=> MyHomePage()));},
+                  
                 ),
                 Divider(
                   thickness: 0.2,
@@ -177,7 +180,7 @@ class _GraphState extends State<Graph> {
                       style: TextStyle(fontSize: 30, color: Colors.white),
                     )
                   ]),
-                  onTap: (){},
+                  onTap: (){Navigator.push(context,MaterialPageRoute(builder:(context)=>const Scientific()));},
                 ),
                 Divider(
                   thickness: 0.2,
@@ -190,7 +193,7 @@ class _GraphState extends State<Graph> {
                       style: TextStyle(fontSize: 30, color: Colors.white),
                     )
                   ]),
-                  onTap: (){},
+                  onTap: (){Navigator.push(context,MaterialPageRoute(builder:(context)=>const Graph()));},
                 ),
               ]))
         ]),
@@ -206,7 +209,7 @@ class _GraphState extends State<Graph> {
                 _themeManager.toggleTheme(newvalue);
               })
         ],
-      ),     body: new Column(
+      ),    /* body: new Column(
         children: <Widget>[
           new Expanded(
               child: new Container(
@@ -288,7 +291,7 @@ class _GraphState extends State<Graph> {
             ]),
           ])
         ],
-      ),
+      ),*/
     );
   }
 }
